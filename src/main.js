@@ -5,4 +5,7 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
+  // render(createElement) {
+  //   return createElement('h1', '你好')
+  // }
 }).$mount('#app')
