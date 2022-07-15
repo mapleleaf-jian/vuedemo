@@ -1,12 +1,8 @@
 import Vue from 'vue'
 import App from './App'
-// 全局引入混合
-// import {mixin} from './mixin.js'
-
+import plugins from './plugins'
 Vue.config.productionTip = false
-
-// Vue.mixin(mixin)
-
+Vue.use(plugins)
 new Vue({
   render: h => h(App)
 }).$mount('#app')

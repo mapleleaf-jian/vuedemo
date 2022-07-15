@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h2 @click="showName">{{name}}</h2>
+    <h2 @click="showName">{{name | mySlice}}</h2>
+    <input v-fbind="name"> <br/><br/>
+    <button @click="test">测试hello方法</button>
   </div>
 </template>
 
 <script>
-  // 局部引入混合
-  import {mixin} from '@/mixin'
   export default {
     name: 'School',
     data() {
@@ -14,7 +14,10 @@
         name: 'java school'
       }
     },
-    // 使用混合，必须使用数组
-    mixins: [mixin]
+    methods: {
+      test() {
+        this.hello()
+      }
+    }
   }
 </script>

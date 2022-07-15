@@ -5,18 +5,12 @@
 </template>
 
 <script>
-  // 局部引入混合
-  import {mixin} from '../mixin.js'
   export default {
     name: 'Student',
     data() {
       return {
         name: 'zhang'
       }
-    },
-    mixins: [mixin],
-    mounted() {
-      console.log('哎')
     }
   }
 </script>
