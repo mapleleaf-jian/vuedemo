@@ -6,17 +6,15 @@
 
 <script>
   // 局部引入混合
-  import {mixin} from '../mixin.js'
+  import {mixin} from '@/mixin'
   export default {
-    name: 'Student',
+    name: 'School',
     data() {
       return {
-        name: 'zhang'
+        name: 'java school'
       }
     },
-    mixins: [mixin],
-    mounted() {
-      console.log('哎')
-    }
+    // 使用混合，必须使用数组
+    mixins: [mixin]
   }
 </script>
