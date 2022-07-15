@@ -1,28 +1,13 @@
 <template>
   <div>
-    <h1 v-text="msg" ref="title"></h1>
-    <button @click="showInfo" ref="btn">展示msg</button>
-    <School ref="vc"></School>
+    <Student></Student>
   </div>
 </template>
 
 <script>
-import School from './components/School'
+import Student from './components/Student'
 export default {
   name: 'App',
-  components: {School},
-  data() {
-    return {
-      msg: 'hello'
-    }
-  },
-  methods: {
-    showInfo() {
-      console.log(this.$refs)
-      console.log(this.$refs.title) // 真实DOM元素
-      console.log(this.$refs.btn) // 真实DOM元素
-      console.log(this.$refs.vc) // VueComponent
-    }
-  }
+  components: {Student}
 }
 </script>
