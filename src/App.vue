@@ -2,9 +2,9 @@
     <div id="root">
       <div class="todo-container">
         <div class="todo-wrap">
-          <MyHeader/>
-          <MyList/>
-          <MyFooter/>
+          <MyHeader :addThing="addThing"/>
+          <MyList :things="things" :changeCheck="changeCheck" :deleteThing="deleteThing"/>
+          <MyFooter :things="things"/>
         </div>
       </div>
     </div>
@@ -18,7 +18,34 @@ import MyFooter from './components/MyFooter'
 
 export default {
   name: 'App',
-  components: {MyHeader, MyFooter, MyItem, MyList}
+  components: {MyHeader, MyFooter, MyItem, MyList},
+  data() {
+    return {
+      things: [
+        {id: '001', name: '看电视', isDone: false},
+        {id: '002', name: '吃饭', isDone: true},
+        {id: '003', name: '睡觉', isDone: false}
+      ]
+    }
+  },
+  methods: {
+    // 实现在things数组首位添加一个输入的thing
+    addThing(thing) {
+      this.things.unshift(thing)
+    },
+    // 处理勾选或取消勾选
+    changeCheck(id) {
+      this.things.forEach((thing) => {
+        if (thing.id === id) {
+          thing.isDone = !thing.isDone
+        }
+      })
+    },
+    // 删除
+    deleteThing(id) {
+      this.things = this.things.filter(i => i.id !== id)
+    }
+  }
 }
 </script>
 

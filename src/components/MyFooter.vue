@@ -5,7 +5,7 @@
         <input type="checkbox"/>
       </label>
       <span>
-         <span>已完成0</span> / 全部2
+         <span>已完成{{count}}</span> / 全部{{things.length}}
       </span>
       <button class="btn btn-danger">清除已完成任务</button>
     </div>
@@ -14,7 +14,14 @@
 
 <script>
   export default {
-    name: 'MyFooter'
+    name: 'MyFooter',
+    props: ['things'],
+    computed: {
+      count() {
+        // return this.things.filter(i => i.isDone).length
+        return this.things.reduce((pre, current) => pre + (current.isDone ? 1 : 0), 0)
+      }
+    }
   }
 </script>
 
