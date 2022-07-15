@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul class="todo-main">
-      <MyItem/>
-      <MyItem/>
+      <MyItem/><hr/>
+      <MyItem/><hr/>
       <MyItem/>
     </ul>
   </div>
