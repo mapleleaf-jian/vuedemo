@@ -9,7 +9,7 @@
     <School v-on:send.once="getSchoolName"></School>
 
     <!--  通过父组件给子组件绑定自定义事件，实现子向父传递数据 (写法二，使用ref) -->
-    <School ref="school"></School>
+    <School ref="school" @click.native="show"></School>
   </div>
 </template>
 
@@ -31,11 +31,17 @@ export default {
     },
     getStudentName(name) {
       console.log('App接收到了学生名字', name)
+    },
+    show() {
+      alert('123')
     }
   },
   // 当挂载完毕后，执行操作，执行getSchoolName函数(写法二)
   mounted() {
     this.$refs.school.$on('send', this.getSchoolName)
+    this.$refs.school.$on('send', function(name, ...params) {
+      console.log('App接收到了学校名字', name, params)
+    })
   }
 }
 </script>
