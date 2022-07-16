@@ -3,9 +3,8 @@
     <ul class="todo-main">
       <MyItem
           v-for="thing in things"
-          :key="thing.id" :thing="thing"
-          :changeCheck="changeCheck"
-          :deleteThing="deleteThing"
+          :key="thing.id"
+          :thing="thing"
       />
     </ul>
   </div>
@@ -16,7 +15,7 @@
   export default {
     name: 'MyList',
     components: {MyItem},
-    props: ['things', 'changeCheck', 'deleteThing']
+    props: ['things']
   }
 </script>
 

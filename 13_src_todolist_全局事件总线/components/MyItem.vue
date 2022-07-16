@@ -7,7 +7,7 @@
         <!--<input type="checkbox" v-model="thing.isDone"/>-->
         <span>{{thing.name}}</span>
       </label>
-      <button class="btn btn-danger" @click="handleDelete(thing.id)" :deleteThing="deleteThing">删除</button>
+      <button class="btn btn-danger" @click="handleDelete(thing.id)">删除</button>
     </li>
   </div>
 </template>
@@ -15,16 +15,16 @@
 <script>
   export default {
     name: 'MyItem',
-    props: ['thing', 'changeCheck', 'deleteThing'],
+    props: ['thing'],
     methods: {
       // 勾选
       handleCheck(id) {
-        this.changeCheck(id)
+        this.$bus.$emit('changeCheck', id)
       },
       //删除
       handleDelete(id) {
         if (confirm('确认删除吗')) {
-          this.deleteThing(id)
+          this.$bus.$emit('deleteThing', id)
         }
       }
     }
