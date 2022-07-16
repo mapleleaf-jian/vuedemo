@@ -2,6 +2,7 @@
   <div class="demo">
     <h2>{{name}}</h2>
     <h2>{{age}}</h2>
+    <button @click="sendStudentName">传递name给School</button>
   </div>
 </template>
 
@@ -12,6 +13,12 @@
       return {
         name: 'zhang',
         age: 18
+      }
+    },
+    methods: {
+      sendStudentName() {
+        console.log(this.$bus)
+        this.$bus.$emit('send', this.name)
       }
     }
   }
