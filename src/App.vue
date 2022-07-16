@@ -21,11 +21,8 @@ export default {
   components: {MyHeader, MyFooter, MyItem, MyList},
   data() {
     return {
-      things: [
-        {id: '001', name: '看电视', isDone: false},
-        {id: '002', name: '吃饭', isDone: true},
-        {id: '003', name: '睡觉', isDone: false}
-      ]
+      // 如果解析出来的结果是null，就返回空数组，避免在把things传向其他组件后，使用的时候空指针
+      things: JSON.parse(localStorage.getItem('things')) || []
     }
   },
   methods: {
@@ -52,6 +49,14 @@ export default {
     // 删除已完成
     clearDoneThing() {
       this.things = this.things.filter(i => !i.isDone)
+    }
+  },
+  watch: {
+    things: {
+      deep: true,
+      handler(value) {
+        localStorage.setItem('things', JSON.stringify(value))
+      }
     }
   }
 }
