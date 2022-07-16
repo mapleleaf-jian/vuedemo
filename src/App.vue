@@ -1,108 +1,48 @@
 <template>
-    <div id="root">
-      <div class="todo-container">
-        <div class="todo-wrap">
-          <MyHeader :addThing="addThing"/>
-          <MyList :things="things" :changeCheck="changeCheck" :deleteThing="deleteThing"/>
-          <MyFooter :things="things" :batchCheck="batchCheck" :clearDoneThing="clearDoneThing"/>
-        </div>
-      </div>
-    </div>
+  <div class="div">
+    <h2>{{msg}}</h2>
+    <!--通过父组件向子组件传递函数类型的props属性，子组件接收，实现子组件向父组件传递数据-->
+    <Student :getStudentName="getStudentName"></Student>
+
+    <!--  通过父组件给子组件绑定自定义事件，实现子向父传递数据，(写法一，使用@ 或 v-on) -->
+    <!--<School @send="getSchoolName"></School>-->
+    <School v-on:send.once="getSchoolName"></School>
+
+    <!--  通过父组件给子组件绑定自定义事件，实现子向父传递数据 (写法二，使用ref) -->
+    <School ref="school"></School>
+  </div>
 </template>
 
 <script>
-import MyHeader from './components/MyHeader'
-import MyList from './components/MyList'
-import MyItem from './components/MyItem'
-import MyFooter from './components/MyFooter'
-
+import School from './components/School'
+import Student from './components/Student'
 export default {
   name: 'App',
-  components: {MyHeader, MyFooter, MyItem, MyList},
+  components: {School, Student},
   data() {
     return {
-      // 如果解析出来的结果是null，就返回空数组，避免在把things传向其他组件后，使用的时候空指针
-      things: JSON.parse(localStorage.getItem('things')) || []
+      msg: 'hello'
     }
   },
   methods: {
-    // 实现在things数组首位添加一个输入的thing
-    addThing(thing) {
-      this.things.unshift(thing)
+    // 执行自定义事件触发的函数(写法一)
+    getSchoolName(name, ...params) {
+      console.log('App接收到了学校名字', name, params)
     },
-    // 处理勾选或取消勾选
-    changeCheck(id) {
-      this.things.forEach((thing) => {
-        if (thing.id === id) {
-          thing.isDone = !thing.isDone
-        }
-      })
-    },
-    // 删除
-    deleteThing(id) {
-      this.things = this.things.filter(i => i.id !== id)
-    },
-    // 处理全选，全不选
-    batchCheck(value) {
-      this.things.forEach(i => i.isDone = value)
-    },
-    // 删除已完成
-    clearDoneThing() {
-      this.things = this.things.filter(i => !i.isDone)
+    getStudentName(name) {
+      console.log('App接收到了学生名字', name)
     }
   },
-  watch: {
-    things: {
-      deep: true,
-      handler(value) {
-        localStorage.setItem('things', JSON.stringify(value))
-      }
-    }
+  // 当挂载完毕后，执行操作，执行getSchoolName函数(写法二)
+  mounted() {
+    this.$refs.school.$on('send', this.getSchoolName)
   }
 }
 </script>
 
 <style>
-  /*base*/
-  body {
-    background: #fff;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 4px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
-  }
-
-  .btn-danger {
-    color: #fff;
-    background-color: #da4f49;
-    border: 1px solid #bd362f;
-  }
-
-  .btn-danger:hover {
-    color: #fff;
-    background-color: #bd362f;
-  }
-
-  .btn:focus {
-    outline: none;
-  }
-
-  .todo-container {
-    width: 600px;
-    margin: 0 auto;
-  }
-  .todo-container .todo-wrap {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  .div {
+    background-color: aquamarine;
+    padding: 5px;
   }
 </style>
