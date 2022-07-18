@@ -1,15 +1,17 @@
 <template>
     <div id="root">
       <TestHello/>
+      <TestHello2/>
     </div>
 </template>
 
 <script>
 import TestHello from './components/TestHello'
+import TestHello2 from './components/TestHello2'
 
 export default {
   name: 'App',
-  components: {TestHello}
+  components: {TestHello, TestHello2}
 }
 </script>
 
