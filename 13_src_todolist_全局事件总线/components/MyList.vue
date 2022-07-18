@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import MyItem from "@/components/MyItem";
+  import MyItem from "@/../../15_src_todolist编辑/components/MyItem";
   export default {
     name: 'MyList',
     components: {MyItem},

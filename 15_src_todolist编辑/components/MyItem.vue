@@ -6,7 +6,11 @@
         <!--以下代码也可实现，但是涉及到对props的修改，虽然vue监测不到，但也不建议这样写-->
         <!--<input type="checkbox" v-model="thing.isDone"/>-->
         <span v-show="!thing.isEdit">{{thing.name}}</span>
-        <input v-show="thing.isEdit" type="text" :value="thing.name" @blur="handleBlur(thing, $event)"> <!--绑定失焦事件-->
+        <input v-show="thing.isEdit"
+               type="text" :value="thing.name"
+               @blur="handleBlur(thing, $event)"
+               ref="inputName"
+        > <!--绑定失焦事件-->
       </label>
       <button class="btn btn-danger" @click="handleDelete(thing.id)">删除</button>
       <button v-show="!thing.isEdit" class="btn btn-edit" @click="handleEdit(thing)">编辑</button>
@@ -36,6 +40,10 @@
         } else {
           this.$set(thing, 'isEdit', true) // 添加属性isEdit
         }
+        // 在上面的更新操作结束，页面DOM更新后，再执行回调函数
+        this.$nextTick(function() {
+          this.$refs.inputName.focus()
+        })
       },
       handleBlur(thing, event) {
         thing.isEdit = false

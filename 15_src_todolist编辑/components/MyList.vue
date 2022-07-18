@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import MyItem from "@/components/MyItem";
+  import MyItem from "./MyItem";
   export default {
     name: 'MyList',
     components: {MyItem},
