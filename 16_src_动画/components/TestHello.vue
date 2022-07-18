@@ -24,7 +24,7 @@ export default {
   }
 
   .hello-enter-active {
-    animation: demo 1s; /*表示进来的动画*/
+    animation: demo 0.5s linear; /*表示进来的动画*/
   }
 
   .hello-leave-active {
