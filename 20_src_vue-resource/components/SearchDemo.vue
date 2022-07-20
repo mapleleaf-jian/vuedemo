@@ -22,7 +22,7 @@
     methods: {
       getUsers() {
         this.$bus.$emit('getData', {isFirst: false, isLoading: true})
-        axios.get(`https://api.github.com/search/users?q=${this.keyword}`).then(
+        this.$http.get(`https://api.github.com/search/users?q=${this.keyword}`).then(
             res => {
               this.$bus.$emit('getData', {isLoading: false, users: res.data.items})
             },
