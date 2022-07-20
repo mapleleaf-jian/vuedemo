@@ -2,26 +2,16 @@
   <div id="app">
     <div class="container">
       <CategoryDemo name="foods" :dataList="foods">
-        <h4 slot="center">这是一个foods列表的center</h4>
-        <h4 slot="footer">这是一个foods列表的footer</h4>
+        <h4>这是一个foods列表</h4>
       </CategoryDemo>
 
       <CategoryDemo name="balls" :dataList="balls">
-        <ul slot="center">
+        <ul>
           <li v-for="(item, index) of balls" :key="index">{{item}}</li>
         </ul>
-        <a slot="footer" href="https://www.baidu.com">跳转到网站</a>
       </CategoryDemo>
 
-      <CategoryDemo name="lessons" :dataList="lessons">
-        <template v-slot:footer>
-          <div>
-            <a href="https://www.baidu.com">网站1 </a>
-            <a href="https://www.baidu.com">网站2 </a>
-          </div>
-          <h4>点击网站学习</h4>
-        </template>
-      </CategoryDemo>
+      <CategoryDemo name="lessons" :dataList="lessons"></CategoryDemo>
     </div>
   </div>
 </template>

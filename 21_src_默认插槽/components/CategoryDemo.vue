@@ -1,9 +1,7 @@
 <template>
-  <div class="demo">
+  <div>
     <h3>{{name}}分类</h3>
-    <!--给插槽起名字-->
-    <slot name="center">center具名插槽默认值</slot>
-    <slot name="footer">footer具名插槽默认值</slot>
+    <slot>默认插槽默认值</slot>
   </div>
 </template>
 
@@ -19,7 +17,7 @@ export default {
     background-color: orange;
     text-align: center;
   }
-  .demo {
+  div {
     background-color: skyblue;
     height: 300px;
     width: 200px;
