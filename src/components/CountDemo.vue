@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>当前求和为：{{sum}}</h3>
+    <h3>当前求和为：{{$store.state.sum}}</h3>
     <select v-model.number="n">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -18,26 +18,23 @@ export default {
   name: 'CountDemo',
   data() {
     return {
-      n: 1, // 用户选择的
-      sum: 0 // 总和
+      n: 1 // 用户选择的
     }
   },
   methods: {
-    increment() {
-      this.sum += this.n
+    increment() { // mutations中的逻辑能满足需求，可以直接跳过actions
+      // this.$store.dispatch('add', this.n)
+      this.$store.commit('ADD', this.n)
     },
     decrement() {
-      this.sum -= this.n
+      // this.$store.dispatch('sub', this.n)
+      this.$store.commit('SUB', this.n)
     },
     incrementOdd() {
-      if (this.sum % 2) {
-        this.sum += this.n
-      }
+      this.$store.dispatch('addOdd', this.n)
     },
     incrementWait() {
-      setTimeout(() => {
-        this.sum += this.n
-      }, 500)
+      this.$store.dispatch('addWait', this.n)
     }
   }
 }
