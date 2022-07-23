@@ -2,9 +2,7 @@
   <div id="app">
     <div>
       <div class="row">
-        <div class="col-xs-offset-2 col-xs-8">
-          <div class="page-header"><h2>Vue Router Demo</h2></div>
-        </div>
+        <Banner/>
       </div>
       <div class="row">
         <div class="col-xs-2 col-xs-offset-2">
@@ -13,12 +11,8 @@
             <router-link to="/home" class="list-group-item" active-class="active">Home</router-link>
           </div>
         </div>
-        <div class="col-xs-6">
-          <div class="panel">
-            <div class="panel-body">
-              <router-view></router-view>
-            </div>
-          </div>
+        <div class="col-xs-6 panel panel-body">
+            <router-view></router-view>
         </div>
       </div>
     </div>
@@ -26,7 +20,9 @@
 </template>
 
 <script>
+import Banner from './components/Banner'
   export default {
-    name: 'App'
+    name: 'App',
+    components: {Banner}
   }
 </script>
