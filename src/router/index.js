@@ -25,12 +25,14 @@ const route =  new VueRouter({
                 {
                     name: 'xinwen',
                     path: 'news',
-                    component: News
+                    component: News,
+                    meta: {isAuth: true} // 配置鉴权属性，放在meta配置项中
                 },
                 {
                     name: 'xiaoxi',
                     path: 'message',
                     component: Message,
+                    meta: {isAuth: true},
                     children: [
                         {
                             name: 'msgdetail',
@@ -49,15 +51,14 @@ const route =  new VueRouter({
 })
 
 // 全局前置路由守卫--初始化的时候被调用、每次路由切换之前被调用
-route.beforeEach((to, from, next) => {
-    console.log(store)
-    if (to.name === 'xinwen' || to.name === 'xiaoxi') {
-        if (store.state.address !== 'bei-jing') {
+route.beforeEach((to, from, next) => { // to是要跳转的组件，from是当前组件，next是一个函数
+    if (to.meta.isAuth) { // 使用路由组件的isAuth进行校验，也可以使用name、path
+        if (store.state.address !== 'bei-jing') { // store存储的是beijing
             alert('地址不对应')
             return
         }
     }
-    next()
+    next() // next表示放行
 })
 
 export default route
