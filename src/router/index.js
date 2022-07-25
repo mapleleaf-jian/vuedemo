@@ -33,17 +33,8 @@ export default new VueRouter({
                             // path: 'detail/:id/:name',
                             path: 'detail',
                             component: Detail,
-
-                            // 第一种写法：值为对象，该对象中的所有key-value都会以props的方式接收
-                            // props: {a: 1, b: 'hello'}
-
-                            // props: true
-
-                            // props($route) {
-                            //     return {id: $route.query.id, name: $route.query.name}
-                            // }
-                            props({query}) {
-                                return {id: query.id, name: query.name}
+                            props($route) {
+                                return {id: $route.query.id, name: $route.query.name}
                             }
                         }
                     ]
