@@ -1,0 +1,58 @@
+<template>
+  <div>
+    <ul>
+      <li v-for="m of msgList" :key="m.id">
+<!--        <router-link :to="`/home/message/detail/${m.id}/${m.name}`">{{m.name}}</router-link>-->
+
+        <router-link :to="{
+          name: 'msgdetail',
+          query: {
+            id: m.id,
+            name: m.id
+          }
+        }">
+          {{m.name}}
+        </router-link>
+
+        <button @click="pushShow(m)">push查看</button>
+        <button @click="replaceShow(m)">replace查看</button>
+      </li>
+    </ul>
+    <router-view></router-view>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Message',
+  data() {
+    return {
+      msgList: [
+        {id: '001', name: 'message1'},
+        {id: '002', name: 'message2'},
+        {id: '003', name: 'message3'}
+      ]
+    }
+  },
+  methods: {
+    pushShow(m) {
+      this.$router.push({
+        name: 'msgdetail',
+        query: {
+          id: m.id,
+          name: m.id
+        }
+      })
+    },
+    replaceShow(m) {
+      this.$router.replace({
+        name: 'msgdetail',
+        query: {
+          id: m.id,
+          name: m.id
+        }
+      })
+    }
+  }
+}
+</script>
