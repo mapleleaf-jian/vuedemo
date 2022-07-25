@@ -11,6 +11,7 @@ import store from '../store'
 Vue.use(VueRouter)
 
 const route =  new VueRouter({
+    mode: 'history',
     routes: [
         {
             name: 'guanyu',
