@@ -6,6 +6,12 @@
 
 <script>
 export default {
-  name: 'About'
+  name: 'About',
+  beforeRouteEnter(to, from, next) {
+
+  },
+  beforeRouteLeave(to, from, next) {
+
+  }
 }
 </script>

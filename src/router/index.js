@@ -16,7 +16,7 @@ const route =  new VueRouter({
             name: 'guanyu',
             path: '/about',
             component: About,
-            meta: {title: '关于'}
+            meta: {isAuth: true, title: '关于'}
         },
         {
             name: 'zhuye',
@@ -28,7 +28,16 @@ const route =  new VueRouter({
                     name: 'xinwen',
                     path: 'news',
                     component: News,
-                    meta: {isAuth: true, title: '新闻'} // 配置鉴权属性，放在meta配置项中
+                    meta: {isAuth: true, title: '新闻'}, // 配置鉴权属性，放在meta配置项中
+                    beforeEnter(to, from, next) {
+                        if (to.meta.isAuth) {
+                            if (store.state.address !== 'bei-jing') {
+                                alert('地址不对应')
+                                return
+                            }
+                        }
+                        next()
+                    }
                 },
                 {
                     name: 'xiaoxi',
@@ -54,19 +63,19 @@ const route =  new VueRouter({
 })
 
 // 全局前置路由守卫--初始化的时候被调用、每次路由切换之前被调用
-route.beforeEach((to, from, next) => { // to是要跳转的组件，from是当前组件，next是一个函数
-    if (to.meta.isAuth) { // 使用路由组件的isAuth进行校验，也可以使用name、path
-        if (store.state.address !== 'bei-jing') { // store存储的是beijing
-            alert('地址不对应')
-            return
-        }
-    }
-    next() // next表示放行
-})
+// route.beforeEach((to, from, next) => { // to是要跳转的组件，from是当前组件，next是一个函数
+//     if (to.meta.isAuth) { // 使用路由组件的isAuth进行校验，也可以使用name、path
+//         if (store.state.address !== 'bei-jing') { // store存储的是beijing
+//             alert('地址不对应')
+//             return
+//         }
+//     }
+//     next() // next表示放行
+// })
 
 // 全局后置路由守卫--初始化的时候被调用、每次路由切换之后被调用
-route.afterEach((to, from) => {
-    document.title = to.meta.title || '系统' // 改变当前页的title
-})
+// route.afterEach((to, from) => {
+//     document.title = to.meta.title || '系统' // 改变当前页的title
+// })
 
 export default route
